@@ -1,8 +1,6 @@
 package br.example.banzonetwork.model;
 
 import javax.persistence.Embeddable;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Embeddable
 public class Endereco {
