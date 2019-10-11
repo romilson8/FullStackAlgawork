@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.example.banzonetwork.event.RecursoCriadoEvent;
 import br.example.banzonetwork.model.Aluno;
 import br.example.banzonetwork.repository.AlunoRepository;
+import br.example.banzonetwork.service.AlunoService;
 
 @RestController
 @RequestMapping("/aluno")
@@ -32,27 +34,36 @@ public class AlunoResource {
 	@Autowired
 	private ApplicationEventPublisher publisher;
 	
+	@Autowired
+	private AlunoService alunoService;
+	
 	@GetMapping
 	public List<Aluno> getListAlunos(){
 		return alunoRepository.findAll();
 	}
 	
-	@GetMapping("/{id}")
-	public ResponseEntity<Aluno>buscarPeloCodigo(@PathVariable Integer id) {
-		Aluno aluno = alunoRepository.findOne(id);
+	@GetMapping("/{codigo}")
+	public ResponseEntity<Aluno> buscarPeloCodigo(@PathVariable Long codigo) {
+		Aluno aluno = alunoRepository.findOne(codigo);
 		return aluno != null ? ResponseEntity.ok(aluno) : ResponseEntity.notFound().build();
 	}
 	
 	@PostMapping
 	private ResponseEntity<Aluno> criar(@Valid @RequestBody Aluno aluno, HttpServletResponse response) {
 		Aluno alunoSalvo = alunoRepository.save(aluno);
-		publisher.publishEvent(new RecursoCriadoEvent(this, response, alunoSalvo.getId()));
+		publisher.publishEvent(new RecursoCriadoEvent(this, response, alunoSalvo.getCodigo()));
 		return ResponseEntity.status(HttpStatus.CREATED).body(alunoSalvo);
 	}
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/{codigo}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void remover(@PathVariable Integer id) {
-		alunoRepository.delete(id);
+	public void remover(@PathVariable Long codigo) {
+		alunoRepository.delete(codigo);
+	}
+	
+	@PutMapping("/{codigo}")
+	public ResponseEntity<Aluno> atualizar(@PathVariable Long codigo, @Valid @RequestBody Aluno aluno){
+		Aluno alunoSalvo = alunoService.atualizar(codigo, aluno);
+		return ResponseEntity.ok(alunoSalvo);
 	}
 }

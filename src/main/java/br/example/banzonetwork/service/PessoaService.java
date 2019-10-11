@@ -15,7 +15,7 @@ public class PessoaService {
 	@Autowired
 	private PessoaRepository pessoaRepository;
 	
-	public Pessoa atualizar (Long codigo, Pessoa pessoa) {
+	public Pessoa atualizar(Long codigo, Pessoa pessoa) {
 		Pessoa pessoaSalva = buscarPessoaPeloCodigo(codigo);
 		
 		BeanUtils.copyProperties(pessoa, pessoaSalva, "codigo");
