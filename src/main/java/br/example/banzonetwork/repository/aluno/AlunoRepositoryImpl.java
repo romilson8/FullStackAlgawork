@@ -17,8 +17,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.util.StringUtils;
 
 import br.example.banzonetwork.model.Aluno;
-import br.example.banzonetwork.model.Aluno_;
-import br.example.banzonetwork.model.Lancamento;
 import br.example.banzonetwork.repository.filter.AlunoFilter;
 
 public class AlunoRepositoryImpl implements AlunoRepositoryQuery {
@@ -52,11 +50,11 @@ public class AlunoRepositoryImpl implements AlunoRepositoryQuery {
 		
 		if (!StringUtils.isEmpty(alunoFilter.getNome())) {
 			predicates.add(builder.like(
-					builder.lower(root.get(Aluno_.nome)), "%" + alunoFilter.getNome().toLowerCase() + "%"));
+					builder.lower(root.get("nome")), "%" + alunoFilter.getNome().toLowerCase() + "%"));
 		}
 		if (!StringUtils.isEmpty(alunoFilter.getEmail())) {
 			predicates.add(builder.like(
-					builder.lower(root.get(Aluno_.email)), "%" + alunoFilter.getEmail().toLowerCase() + "%"));
+					builder.lower(root.get("email")), "%" + alunoFilter.getEmail().toLowerCase() + "%"));
 		}
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}

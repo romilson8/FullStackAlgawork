@@ -28,6 +28,8 @@ public class Aluno {
 	
 	private String telefone;
 	
+	private Character sexo;
+	
 	@Column(name = "data_avaliacao")
 	private Date dataAvalicao;
 	
@@ -99,6 +101,14 @@ public class Aluno {
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+
+	public Character getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(Character sexo) {
+		this.sexo = sexo;
 	}
 
 	@Override

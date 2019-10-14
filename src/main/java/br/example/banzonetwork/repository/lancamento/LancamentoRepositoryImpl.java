@@ -17,7 +17,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.util.StringUtils;
 
 import br.example.banzonetwork.model.Lancamento;
-import br.example.banzonetwork.model.Lancamento_;
 import br.example.banzonetwork.repository.filter.LancamentoFilter;
 
 public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
@@ -48,16 +47,16 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 		
 		if (!StringUtils.isEmpty(lancamentoFilter.getDescricao())) {
 			predicates.add(builder.like(
-					builder.lower(root.get(Lancamento_.descricao)), "%" + lancamentoFilter.getDescricao().toLowerCase() + "%"));
+					builder.lower(root.get("descricao")), "%" + lancamentoFilter.getDescricao().toLowerCase() + "%"));
 		}
 		if (lancamentoFilter.getDataVencimentoDe() != null) {
 			predicates.add(
-					builder.greaterThanOrEqualTo(root.get(Lancamento_.dataVencimento), lancamentoFilter.getDataVencimentoDe()));
+					builder.greaterThanOrEqualTo(root.get("dataVencimento"), lancamentoFilter.getDataVencimentoDe()));
 
 		}
 		if (lancamentoFilter.getDataVencimentoAte() != null) {
 			predicates.add(
-					builder.lessThanOrEqualTo(root.get(Lancamento_.dataVencimento), lancamentoFilter.getDataVencimentoAte()));
+					builder.lessThanOrEqualTo(root.get("dataVencimento"), lancamentoFilter.getDataVencimentoAte()));
 
 		}
 
