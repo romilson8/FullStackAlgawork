@@ -7,6 +7,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.example.banzonetwork.event.RecursoCriadoEvent;
 import br.example.banzonetwork.model.Aluno;
 import br.example.banzonetwork.repository.AlunoRepository;
+import br.example.banzonetwork.repository.filter.AlunoFilter;
 import br.example.banzonetwork.service.AlunoService;
 
 @RestController
@@ -38,8 +41,8 @@ public class AlunoResource {
 	private AlunoService alunoService;
 	
 	@GetMapping
-	public List<Aluno> getListAlunos(){
-		return alunoRepository.findAll();
+	public Page<Aluno> getListAlunos(AlunoFilter alunoFilter, Pageable pageable){
+		return alunoRepository.filtrar(alunoFilter, pageable);
 	}
 	
 	@GetMapping("/{codigo}")
