@@ -1,6 +1,7 @@
 package br.example.banzonetwork.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -8,6 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -36,8 +40,14 @@ public class Aluno {
 	@Column(name = "data_reavaliacao")
 	private Date dataReavaliacao;
 	
+	
+	
 	@Embedded
 	private Endereco endereco;
+	
+	@OneToMany
+	@JoinColumn(name = "aluno_codigo")
+	private List<Dobras> dobras;
 
 	public Long getCodigo() {
 		return codigo;
@@ -109,6 +119,14 @@ public class Aluno {
 
 	public void setSexo(Character sexo) {
 		this.sexo = sexo;
+	}
+
+	public List<Dobras> getDobras() {
+		return dobras;
+	}
+
+	public void setDobras(List<Dobras> dobras) {
+		this.dobras = dobras;
 	}
 
 	@Override

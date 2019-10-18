@@ -4,7 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -33,7 +35,9 @@ public class Dobras {
 	
 	private Double panturrilha_media;
 	
-	private Long aluno_codigo;
+//	@OneToMany
+//	@JoinColumn(name = "aluno_codigo")
+//	private Aluno aluno;
 
 	
 
@@ -117,13 +121,13 @@ public class Dobras {
 		this.panturrilha_media = panturrilha_media;
 	}
 
-	public Long getAluno_codigo() {
-		return aluno_codigo;
-	}
-
-	public void setAluno_codigo(Long aluno_codigo) {
-		this.aluno_codigo = aluno_codigo;
-	}
+//	public Aluno getAluno() {
+//		return aluno;
+//	}
+//
+//	public void setAluno(Aluno aluno) {
+//		this.aluno = aluno;
+//	}
 
 	@Override
 	public int hashCode() {

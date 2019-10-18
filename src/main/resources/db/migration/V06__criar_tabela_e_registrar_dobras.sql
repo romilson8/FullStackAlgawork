@@ -21,3 +21,4 @@ CREATE TABLE IF NOT EXISTS `dobras` (
 ENGINE = InnoDB;
 
 INSERT INTO `dobras` (`subescapular`, `tricipital`, `peitoral`, `axilar_media`, `supra_iliaca`, `bicipital`, `supra_espinhal`, `abdominal`, `coxa`, `panturrilha_media`, `aluno_codigo`) VALUES ('22.2', '13', '14', '22', '35', '16', '25', '35', '35', '17', '1');
+INSERT INTO `dobras` (`subescapular`, `tricipital`, `peitoral`, `axilar_media`, `supra_iliaca`, `bicipital`, `supra_espinhal`, `abdominal`, `coxa`, `panturrilha_media`, `aluno_codigo`) VALUES ('24', '12', '11', '22.3', '33.2', '15', '21', '30', '32', '13', '1');
