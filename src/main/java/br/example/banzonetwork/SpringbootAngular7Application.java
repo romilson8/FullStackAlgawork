@@ -9,5 +9,4 @@ public class SpringbootAngular7Application {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringbootAngular7Application.class, args);
 	}
-
 }
