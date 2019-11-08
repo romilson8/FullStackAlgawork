@@ -17,12 +17,14 @@ import org.springframework.stereotype.Service;
 import br.example.banzonetwork.model.Usuario;
 import br.example.banzonetwork.repository.UsuarioRepository;
 
+
+
 @Service
-public class AppUserDetailsService implements UserDetailsService{
-	
+public class AppUserDetailsService implements UserDetailsService {
+
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-
+	
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		Optional<Usuario> usuarioOptional = usuarioRepository.findByEmail(email);
@@ -31,7 +33,6 @@ public class AppUserDetailsService implements UserDetailsService{
 	}
 
 	private Collection<? extends GrantedAuthority> getPermissoes(Usuario usuario) {
-		// TODO Auto-generated method stub
 		Set<SimpleGrantedAuthority> authorities = new HashSet<>();
 		usuario.getPermissoes().forEach(p -> authorities.add(new SimpleGrantedAuthority(p.getDescricao().toUpperCase())));
 		return authorities;
